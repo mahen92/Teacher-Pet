@@ -1,0 +1,51 @@
+package com.example.mahendran.teacherspet.DiscussionRoom;
+
+import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+
+import com.example.mahendran.teacherspet.R;
+import com.example.mahendran.teacherspet.StudentDatabase.FireBaseAdapter;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DatabaseReference;
+
+/**
+ * Created by Mahendran on 28-05-2017.
+ */
+
+public class DiscussionAdapter extends FirebaseRecyclerAdapter<DiscussionboardValues, DiscussionValuesAdapterHolder> {
+    private static final String TAG = FireBaseAdapter.class.getSimpleName();
+    private Context context;
+    private String teacher;
+
+    public DiscussionAdapter(Class<DiscussionboardValues> modelClass, int modelLayout, Class<DiscussionValuesAdapterHolder> viewHolderClass, DatabaseReference ref, Context context, String check) {
+        super(modelClass, modelLayout, viewHolderClass, ref);
+        teacher = check;
+        this.context = context;
+    }
+
+    @Override
+    protected void populateViewHolder(DiscussionValuesAdapterHolder viewHolder, DiscussionboardValues model, int position) {
+        viewHolder.answer.setText(context.getString(R.string.answer) + model.getAnswer());
+        viewHolder.question.setText(context.getString(R.string.question) + model.getQuestion());
+        final String quest = model.getQuestion();
+        final String ans = model.getAnswer();
+        final String id = model.getId();
+        if (teacher == "t") {
+            viewHolder.answer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(context, StudentDiscussionBoard.class);
+                    intent.putExtra("question", quest);
+                    intent.putExtra("answer", ans);
+                    intent.putExtra("id", id);
+                    intent.putExtra("from", "Teacher");
+                    context.startActivity(intent);
+
+                }
+            });
+        }
+    }
+}
