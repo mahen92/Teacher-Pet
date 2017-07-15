@@ -5,8 +5,8 @@ android {
         config {
             keyAlias 'udacity'
             keyPassword 'password'
-            storeFile file("$rootDir/keystore.jks")
             storePassword 'password'
+            storeFile file("$rootDir/keystore.jks")
         }
     }
     packagingOptions {
