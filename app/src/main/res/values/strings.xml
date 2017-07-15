@@ -107,4 +107,5 @@
     <string name="averager">Average :</string>
     <string name="topper">Top Student :</string>
     <string name="Refresh">Refresh</string>
+    <string name="add_question">Add Question</string>
 </resources>

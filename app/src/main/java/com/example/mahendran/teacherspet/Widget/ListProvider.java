@@ -148,8 +148,8 @@ public class ListProvider implements RemoteViewsService.RemoteViewsFactory {
                 context.getPackageName(), R.layout.list_row);
         try {
             ListItem listItem = listItemList.get(position);
-            remoteView.setTextViewText(R.id.answer, "Question: " + listItem.content);
-            remoteView.setTextViewText(R.id.question, "Answer: " + listItem.heading);
+            remoteView.setTextViewText(R.id.answer, context.getString(R.string.question) + listItem.content);
+            remoteView.setTextViewText(R.id.question, context.getString(R.string.answer) + listItem.heading);
         } catch (ArrayIndexOutOfBoundsException e) {
             e.fillInStackTrace();
         } catch (IndexOutOfBoundsException i) {
